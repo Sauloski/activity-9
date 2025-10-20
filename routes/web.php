@@ -13,6 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
+// Nueva ruta para el landing page (pública)
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('landingpage');
+})->name('landing');
+
+// Nueva ruta para el dashboard (protegida)
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('auth')->name('dashboard');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
